@@ -1,9 +1,9 @@
 const bcrypt = require("bcrypt");
 const User = require("../models/user.model.js");
 const { handleError } = require("../utils/error.js");
+const Listing = require("../models/listing.model.js");
 
 const updateProfile = async (req, res, next) => {
-  
   if (req.verifiedUser.id !== req.params.id)
     return next(handleError(403, "You can only update your own account"));
   try {
@@ -13,18 +13,18 @@ const updateProfile = async (req, res, next) => {
     const updatedUser = await User.findByIdAndUpdate(
       req.params.id,
       {
-        $set:{ 
-            name:req.body.name,
-            email:req.body.email,
-            password:req.body.password,
-            avatar:req.body.avatar,
-        } 
+        $set: {
+          name: req.body.name,
+          email: req.body.email,
+          password: req.body.password,
+          avatar: req.body.avatar,
+        },
       },
       { new: true }
     );
     const { password, ...user } = updatedUser._doc;
     res.status(200).json(user);
-  } catch (error) { 
+  } catch (error) {
     next(error);
   }
 };
@@ -39,6 +39,18 @@ const deleteUser = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-}
+};
 
-module.exports = { updateProfile , deleteUser};
+const getUserListings = async (req, res, next) => {
+  console.log(req.params.id);
+  if (req.verifiedUser.id == req.params.id) {
+    try {
+      const listings = await Listing.find({ userRef: req.params.id });
+      res.status(200).json(listings);
+    } catch (error) {
+      next(error);
+    }
+  } else return next(handleError(403, "You can only get your own listings"));
+};
+
+module.exports = { updateProfile, deleteUser, getUserListings };

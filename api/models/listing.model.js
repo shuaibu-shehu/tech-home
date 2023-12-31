@@ -9,6 +9,9 @@ const listingSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    offerType: {
+        type: Boolean,
+    },
     regularPrice: {
         type: Number,
         required: true,
