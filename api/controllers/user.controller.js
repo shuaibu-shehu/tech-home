@@ -52,4 +52,16 @@ const getUserListings = async (req, res, next) => {
   } else return next(handleError(403, "You can only get your own listings"));
 };
 
-module.exports = { updateProfile, deleteUser, getUserListings };
+const getUser = async (req, res, next) => {
+        console.log(req.params.id);
+      try {
+        const user = await User.findById(req.params.id);
+        if (!user) return next(handleError(404, "User not found"));
+        const { password, ...rest } = user._doc;
+        res.status(200).json(rest);
+      } catch (error) {
+        next(error);
+      }
+}
+
+module.exports = { updateProfile, deleteUser, getUserListings, getUser };

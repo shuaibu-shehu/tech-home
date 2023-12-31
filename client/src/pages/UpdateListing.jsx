@@ -113,7 +113,7 @@ export const UpdateListing = () => {
         setLoading(false);
       }
       setLoading(false);
-      navigate(`/lisitng/${data._id}`);
+      navigate(`/listing/${data._id}`);
   
     } catch (error) {
       setError(error.message);

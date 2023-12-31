@@ -21,7 +21,7 @@ export const CreateListing = () => {
   const [formData, setFormData] = useState({
     userRef: currentUser._id,
     imageUrls: [],
-    name: "dffef",
+    name: "",
     description: "",
     address: "",
     regularPrice: 20,
@@ -111,7 +111,7 @@ export const CreateListing = () => {
         setLoading(false);
       }
       setLoading(false);
-      navigate(`/lisitng/${data._id}`);
+      navigate(`/listing/${data._id}`);
   
     } catch (error) {
       setError(error.message);
@@ -184,7 +184,7 @@ export const CreateListing = () => {
               type="number"
               onChange={handleChange}
               defaultValue={formData.discountPrice}
-              min={20}
+              min={20} 
               max={10000}
               name="discountPrice"
             />
