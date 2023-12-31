@@ -30,7 +30,6 @@ export const Profile = () => {
   const { currentUser, loading, error } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const fileRef = useRef(null);
-  console.log(currentUser);
   useEffect(() => {
     if (file) {
       handleUpload(file);
