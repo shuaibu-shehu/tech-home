@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { app } from "../firebase";
 import {
   getStorage,
@@ -16,6 +17,7 @@ export const CreateListing = () => {
   const [uploading, setUploading] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     userRef: currentUser._id,
     imageUrls: [],
@@ -109,6 +111,7 @@ export const CreateListing = () => {
         setLoading(false);
       }
       setLoading(false);
+      navigate(`/lisitng/${data._id}`);
   
     } catch (error) {
       setError(error.message);
