@@ -15,3 +15,4 @@ router.get('/listings/:id',verifyToken,getUserListings);
 
 
 module.exports = router;
+ 

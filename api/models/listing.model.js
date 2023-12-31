@@ -8,7 +8,7 @@ const listingSchema = new mongoose.Schema({
     address: {
         type: String,
         required: true,
-    },
+    }, 
     offerType: {
         type: Boolean,
     },
