@@ -42,7 +42,6 @@ const deleteUser = async (req, res, next) => {
 };
 
 const getUserListings = async (req, res, next) => {
-  console.log(req.params.id);
   if (req.verifiedUser.id == req.params.id) {
     try {
       const listings = await Listing.find({ userRef: req.params.id });

@@ -130,7 +130,6 @@ export const Profile = () => {
       setUserListingLoading(true);
       const res = await fetch(`/api/user/listings/${currentUser._id}`);
       const data = await res.json();
-      console.log(data);
       if (data.success === false) {
         setUserListingError(data.message);
         setUserListingLoading(false);
@@ -245,9 +244,11 @@ export const Profile = () => {
         <Link to={`/listing/ ${listing._id}`}>
           <p>{listing.name}</p>
         </Link>
-          <div className="flex flex-col">
-            <button onClick={()=>handleLsitngDelete(listing._id)} className="text-red-600 uppercase"> delete</button>
-            <button className=" text-green-600 uppercase">edit</button>
+          <div className="flex gap-2 flex-col">
+            <button onClick={()=>handleLsitngDelete(listing._id)} className="text-red-600 text-sm uppercase"> delete</button>
+            <Link to={`/update-listing/${listing._id}`}>
+            <button className=" text-green-600 text-sm uppercase">edit</button>
+            </Link>
           </div>
         </div>
         })}

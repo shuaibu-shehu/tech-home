@@ -1,5 +1,7 @@
 const Listing = require('../models/listing.model.js');
+const router = require('../routes/listing.route.js');
 const { handleError } = require('../utils/error.js');
+const { verifyToken } = require('../utils/verifyToken.js');
 
 const createListing = async (req, res, next) => {
     try {
@@ -35,5 +37,13 @@ const updateListing = async (req, res, next) => {
         next(error);
     }
 }
-
-module.exports = { createListing, deleteListing, updateListing };
+const getListing = async (req, res, next) => {  
+        try {
+            const listing = await Listing.findById(req.params.id);
+            if (!listing) return next(handleError(404, "Listing not found"));
+            res.status(200).json(listing);
+        } catch (error) {
+            next(error);
+        }
+}
+module.exports = { createListing, deleteListing, updateListing, getListing };
