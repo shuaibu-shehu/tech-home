@@ -25,7 +25,7 @@ export const Header = () => {
       setSearchTerm(searchTermFromUrl);
     } 
   },[location.search])
-  
+
   return (
     <div className=" bg-slate-600 w-full">
       <div className=" relative m-auto flex max-w-4xl gap-2 items-center justify-between py-3 px-2 text-white">

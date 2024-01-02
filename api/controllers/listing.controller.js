@@ -61,16 +61,15 @@ const getListings = async (req, res, next) => {
     const endIndex = req.query.endIndex || 0;
     const order = req.query.order || "desc";
     const sort = req.query.sort || "createdAt";
-    const serchTerm = req.query.serchTerm || "";
-    let offer = req.query.offers;
+    const searchTerm = req.query.searchTerm || "";
+    let offer = req.query.offer;
     if (offer === false || offer === undefined) {
       offer = { $in: [false, true] };
     }
-
     const listings = await Listing.find({
-      name: { $regex: serchTerm, $options: "i" },
+      name: { $regex: searchTerm, $options: "i" },
       offer,
-    }).limit(limit).skip(startIndex);
+    }).sort({[sort]:order}).limit(limit).skip(startIndex);
     res.status(200).json(listings);
   } catch (error) {
     next(error);

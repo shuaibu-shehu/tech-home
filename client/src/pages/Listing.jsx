@@ -16,7 +16,7 @@ export const Listing = () => {
   const [contactOwner, setContactOwner] = useState(false); 
   const { currentUser } = useSelector((state) => state.user);
   const params = useParams();
-console.log(currentUser);
+
   useEffect(() => {
     const fetchListing = async () => {
       try {
