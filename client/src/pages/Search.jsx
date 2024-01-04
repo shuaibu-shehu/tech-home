@@ -14,7 +14,6 @@ export const Search = () => {
     sort: "createdAt",
   });
 
-  console.log(sidebarData);
   const handleChange = (e) => {
     if (e.target.name === "offer") {
       setSidebarData({
@@ -58,7 +57,7 @@ export const Search = () => {
     offerFromUrl = offerFromUrl === "true" ? true : false;
     const sortFromUrl = urlParams.get("sort");
     const orderFromUrl = urlParams.get("order");
-    if (searchTermFromUrl || offerFromUrl || sort) {
+    if (searchTermFromUrl || offerFromUrl || sortFromUrl) {
       setSidebarData({
         offer: offerFromUrl || false,
         searchTerm: searchTermFromUrl || "",
@@ -66,11 +65,11 @@ export const Search = () => {
         order: orderFromUrl || "desc",
       });
     }
+
     const fetchSearchResults = async () => {
       setshowMore(false);
       setLoading(true);
       const searchQuery = urlParams.toString();
-      console.log(searchQuery);
       const response = await fetch(`/api/listing/get?${searchQuery}`);
       const data = await response.json();
       if(data.length>8){
@@ -80,7 +79,6 @@ export const Search = () => {
       }
       setListings(data);
       setLoading(false);
-      console.log(data);
     };
     fetchSearchResults();
   }, [location.search]);

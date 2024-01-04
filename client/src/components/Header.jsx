@@ -29,7 +29,7 @@ export const Header = () => {
   return (
     <div className=" bg-slate-600 w-full">
       <div className=" relative m-auto flex max-w-4xl gap-2 items-center justify-between py-3 px-2 text-white">
-        <p>Tech-Home</p>
+        <Link className="text-xl" to={'/'}>Tech<span className="text-blue-800 font-bold">Home</span></Link>
         <form onSubmit={handleSubmit} className=" flex gap-1 justify-center items-center  max-w-[250px] min-w-[100px] bg-slate-950 p-3 rounded-lg ">
           <input
             className=" w-[90%] bg-transparent outline-none "
