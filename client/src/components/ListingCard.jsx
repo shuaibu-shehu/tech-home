@@ -2,9 +2,8 @@ import { MdLocationOn } from "react-icons/md";
 import { Link } from "react-router-dom";
 
 export const ListingCard = ({ listing }) => {
-
   return (
-    <div className="bg-gray-300  shadow-lg rounded-lg w-full sm:w-[320px] flex flex-col gap-2 ">
+    <div className="bg-gray-300  shadow-lg rounded-lg w-full sm:w-[320px] flex flex-col gap-4 ">
       <Link
         className="flex overflow-hidden rounded-lg flex-col"
         to={`/listing/${listing._id}`}
@@ -14,15 +13,18 @@ export const ListingCard = ({ listing }) => {
           src={listing.imageUrls[0]}
           alt="listing"
         />
-
-        <p className=" line-clamp-1 m-3 font-semibold truncate">{listing.name}</p>
-        <p className="  m-3 flex gap-1 items-center">
-          <span className="text-green-900">
-            <MdLocationOn />
-          </span>{" "}
-          {listing.address}
-        </p>
-        <p className="  m-3 line-clamp-1">{listing.description}</p>
+        <div className="px-3 my-4 flex flex-col gap-2">
+          <p className=" text-xl line-clamp-1 font-semibold truncate">{listing.name}</p>
+          <p className="flex">
+            <span className="my-[5px] text-green-900">
+              <MdLocationOn />
+            </span>{" "}
+            {listing.address}
+          </p>
+          <p className=" line-clamp-1">{listing.description}</p>
+          <p className="font-bold bg-emerald-900 min-w-[150px] text-center rounded-lg text-white text-lg">{listing.regularPrice}$ price</p>
+          <p className="font-bold bg-red-600 min-w-[150px] text-center rounded-lg text-white text-lg">{listing.discountPrice}$ discount</p>
+        </div>
       </Link>
     </div>
   );
