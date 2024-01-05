@@ -7,6 +7,7 @@ const cors = require("cors");
 const authRouter = require("./routes/auth.route.js");
 const listingRouter = require("./routes/listing.route.js");
 const app = express();
+const path = require('path');
 
 dotenv.config();
 try {
