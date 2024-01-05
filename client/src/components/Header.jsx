@@ -14,7 +14,7 @@ export const Header = () => {
     urlParams.set("searchTerm", searchTerm);
     const searchQuery = urlParams.toString();
     navigate(`/search?${searchQuery}`)   
-    
+     
   }
 
   useEffect(() => {
@@ -68,3 +68,4 @@ export const Header = () => {
     </div>
   );
 };
+ 
