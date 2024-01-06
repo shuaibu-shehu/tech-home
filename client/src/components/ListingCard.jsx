@@ -22,8 +22,8 @@ export const ListingCard = ({ listing }) => {
             {listing.address}
           </p>
           <p className=" line-clamp-1">{listing.description}</p>
-          <p className="font-bold bg-emerald-900 min-w-[150px] text-center rounded-lg text-white text-lg">{listing.regularPrice}$ price</p>
-          <p className="font-bold bg-red-600 min-w-[150px] text-center rounded-lg text-white text-lg">{listing.discountPrice}$ discount</p>
+          <p className="p-2 font-bold bg-emerald-900 text-center rounded-lg text-white text-sm">{listing.regularPrice}$ price</p>
+          <p className="p-2 font-bold bg-red-600 text-center rounded-lg text-white text-sm">{listing.discountPrice}$ discount</p>
         </div>
       </Link>
     </div>
