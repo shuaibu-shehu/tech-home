@@ -53,7 +53,6 @@ const getUserListings = async (req, res, next) => {
 };
 
 const getUser = async (req, res, next) => {
-        console.log(req.params.id);
       try {
         const user = await User.findById(req.params.id);
         if (!user) return next(handleError(404, "User not found"));

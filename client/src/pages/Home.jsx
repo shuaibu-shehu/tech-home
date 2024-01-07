@@ -80,7 +80,7 @@ console.log(recentAddedListings);
             <p className=" capitalize ">recent offers </p>
             <Link className="hover:underline text-green-700" to={`/search/?offer=false`}>see more offers</Link>
           </div>
-          <div className="flex flex-wrap gap-5">
+          <div className="flex p-9 sm:p-6 flex-wrap gap-5">
             {offerListings.map((listing) => (
               <ListingCard listing={listing} />
             ))}

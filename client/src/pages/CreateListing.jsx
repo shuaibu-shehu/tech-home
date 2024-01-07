@@ -9,7 +9,6 @@ import {
 } from "firebase/storage";
 import { useSelector } from "react-redux";
 
-
 export const CreateListing = () => {
   const [files, setFiles] = useState(null);
   const { currentUser } = useSelector((state) => state.user);
@@ -25,13 +24,12 @@ export const CreateListing = () => {
     description: "",
     address: "",
     regularPrice: 20,
-    discountPrice: 20,
+    discountPrice: 0,
     offer: false,
   });
   console.log(formData);
 
   const handleImageSubmit = () => {
-    
     if (files.length > 0 && files.length + formData.imageUrls.length < 7) {
       setUploading(true);
       setImageUploadError(false);
@@ -94,8 +92,10 @@ export const CreateListing = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (formData.imageUrls.length < 1) return setError("Please add atleast 1 image");
-    if(+formData.regularPrice < +formData.discountPrice) return setError("Discount price must be less than regular price");
+    if (formData.imageUrls.length < 1)
+      return setError("Please add atleast 1 image");
+    if (+formData.regularPrice < +formData.discountPrice)
+      return setError("Discount price must be less than regular price");
     try {
       setLoading(true);
       const res = await fetch("/api/listing/create", {
@@ -106,13 +106,12 @@ export const CreateListing = () => {
         body: JSON.stringify(formData),
       });
       const data = await res.json();
-      if(data.success==false){
+      if (data.success == false) {
         setError(data.message);
         setLoading(false);
       }
       setLoading(false);
       navigate(`/listing/${data._id}`);
-  
     } catch (error) {
       setError(error.message);
       setLoading(false);
@@ -161,7 +160,12 @@ export const CreateListing = () => {
           />
           <div className=" flex flex-col gap-3">
             <div className="flex gap-2">
-              <input type="checkbox" onChange={handleChange} defaultValue={formData.offer} id="offer" />
+              <input
+                type="checkbox"
+                onChange={handleChange}
+                defaultValue={formData.offer}
+                id="offer"
+              />
               <label htmlFor="offer">offer</label>
             </div>
             <div className="flex items-center gap-3">
@@ -176,20 +180,21 @@ export const CreateListing = () => {
               />
               <span>Regular price($)</span>
             </div>
-        
-           {formData.offer && 
-            <div className="flex items-center gap-3">
-            <input
-              className="border-2  p-3 w-32 outline-slate-600"
-              type="number"
-              onChange={handleChange}
-              defaultValue={formData.discountPrice}
-              min={20} 
-              max={10000}
-              name="discountPrice"
-            />
-            <span>Discount price ($)</span>
-          </div>}
+
+            {formData.offer && (
+              <div className="flex items-center gap-3">
+                <input
+                  className="border-2  p-3 w-32 outline-slate-600"
+                  type="number"
+                  onChange={handleChange}
+                  defaultValue={formData.discountPrice}
+                  min={0}
+                  max={10000}
+                  name="discountPrice"
+                />
+                <span>Discount price ($)</span>
+              </div>
+            )}
           </div>
         </div>
         <div className="flex flex-col gap-3 ">
@@ -197,25 +202,30 @@ export const CreateListing = () => {
             <span className=" font-semibold">Images</span>: the first image will
             be the cover (max 6)
           </div>
-          <div className="flex flex-wrap gap-2 p-1">
-            <input
-              onChange={(e) => setFiles(e.target.files)}
-              type="file"
-              multiple
-              id="images"
-              accept="image/*"
-              className=" rounded-md border-2 p-2"
-            />
-            <button
-              disabled={uploading}
-              onClick={handleImageSubmit}
-              type="button"
-              className="p-3 rounded-xl border-2 uppercase hover:shadow-lg border-slate-300"
-            >
-              {uploading ? "uploading ..." : "upload"}
-            </button>
-
-           {imageUploadError &&  <span className="text-center text-red-600">{imageUploadError}</span>}
+          <div>
+            <div className="flex flex-wrap gap-1 p-1">
+              <input
+                onChange={(e) => setFiles(e.target.files)}
+                type="file"
+                multiple
+                id="images"
+                accept="image/*"
+                className=" rounded-md border-2 p-2"
+              />
+              <button
+                disabled={uploading}
+                onClick={handleImageSubmit}
+                type="button"
+                className=" text-xs  w-[100px] rounded-xl border-2 uppercase hover:shadow-lg border-slate-300"
+              >
+                {uploading ? "uploading ..." : "upload"}
+              </button>
+            </div>
+            {imageUploadError && (
+              <span className="text-center text-red-600">
+                {imageUploadError}
+              </span>
+            )}
           </div>
           {formData.imageUrls.length > 0 && (
             <div className="flex flex-col gap-2">
@@ -246,8 +256,11 @@ export const CreateListing = () => {
               })}
             </div>
           )}
-          <button disabled={loading || uploading} className="bg-slate-600 uppercase rounded-md text-white p-3">
-           {loading? 'creating ....':'Create listing'}
+          <button
+            disabled={loading || uploading}
+            className="bg-slate-600 uppercase rounded-md text-white p-3"
+          >
+            {loading ? "creating ...." : "Create listing"}
           </button>
           {error && <span className="text-red-600">{error}</span>}
         </div>

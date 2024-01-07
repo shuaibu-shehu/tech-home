@@ -31,6 +31,7 @@ export const Profile = () => {
   const [userListings, setUserListings] = useState([]);
   const [userListingLoading, setUserListingLoading] = useState(false);
   const { currentUser, loading, error } = useSelector((state) => state.user);
+  const [listingsAvailable, setListingsAvailable] = useState(true);
   const dispatch = useDispatch();
   const fileRef = useRef(null);
   useEffect(() => {
@@ -136,6 +137,9 @@ export const Profile = () => {
         return;
       }
       setUserListings(data);
+      if(data.length === 0){
+        setListingsAvailable(false);
+      }
       setUserListingLoading(false);
     } catch (error) {
       setUserListingError(error.message);
@@ -229,7 +233,7 @@ export const Profile = () => {
       <p className="text-green-700 text-center">{updateSuccess? 'usuccessfully updated profile' :''}</p>
       <button  onClick={handelGetListings} className=" my-2 w-full text-green-700 text-center cursor-pointer text-lg">{userListingLoading? 'loading listings...': 'show listings'}</button>
       <p className="text-red-700 text-center">{userListingError? 'error showing listing' :''}</p>
-
+      {!listingsAvailable && <p className="text-red-700 text-center">no listings available</p>}
       {userListings.length > 0 && 
      <div className="flex flex-col gap-2">
       <h1 className="text-2xl text-center uppercase my-3">your listings</h1>

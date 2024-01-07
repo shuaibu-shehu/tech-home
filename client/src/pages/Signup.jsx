@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { Oauth } from "../components/Oauth.jsx";
 
 export const Signup = () => {
   const [formData, setFormData] = useState({});
@@ -63,6 +64,7 @@ export const Signup = () => {
         >
           {loading ? "loading..." : "sign up"}
         </button>
+        <Oauth/>
         {error && <p className=" text-center">{error}</p>}
         <p className=" text-center">
           have an account?{" "}
