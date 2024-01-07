@@ -219,21 +219,21 @@ export const Profile = () => {
         />
         <button
          disabled={loading}
-          className=" rounded-md  text-lg outline-none m-2 text-white p-2 py-3 bg-red-950"
+          className=" rounded-md  uppercase text-sm outline-none m-2 text-white p-2 py-3 bg-red-950"
           type="submit"
         >{loading? 'loading ...': 'update'}
         </button>
-      <Link to={'/create-listing'} className=" bg-green-700 text-white p-3 rounded-lg text-center text-lg mx-2">Creater List</Link>
+      <Link to={'/create-listing'} className=" uppercase bg-green-700 text-white p-3 rounded-lg text-center text-sm mx-2">Creater List</Link>
       </form>
       <div className="flex justify-between m-2">
-        <span onClick={handleDelete} className="text-red-700">delete acount</span>
-        <span onClick={handleSignOut} className=" text-red-700">sign out</span>
+        <button onClick={handleDelete} className=" uppercase text-sm text-red-700">delete acount</button>
+        <button onClick={handleSignOut} className=" uppercase text-sm text-red-700">sign out</button>
       </div>
       <p className="text-red-700 text-center">{error? error :''}</p>
       <p className="text-green-700 text-center">{updateSuccess? 'usuccessfully updated profile' :''}</p>
-      <button  onClick={handelGetListings} className=" my-2 w-full text-green-700 text-center cursor-pointer text-lg">{userListingLoading? 'loading listings...': 'show listings'}</button>
+      <button  onClick={handelGetListings} className=" my-2 uppercase text-sm w-full text-green-700 text-center cursor-pointer text-lg">{userListingLoading? 'loading listings...': 'show listings'}</button>
       <p className="text-red-700 text-center">{userListingError? 'error showing listing' :''}</p>
-      {!listingsAvailable && <p className="text-red-700 text-center">no listings available</p>}
+      {!listingsAvailable && <p className="text-red-700 uppercase text-center">no listings available</p>}
       {userListings.length > 0 && 
      <div className="flex flex-col gap-2">
       <h1 className="text-2xl text-center uppercase my-3">your listings</h1>
@@ -249,9 +249,9 @@ export const Profile = () => {
           <p>{listing.name}</p>
         </Link>
           <div className="flex gap-2 flex-col">
-            <button onClick={()=>handleLsitngDelete(listing._id)} className="text-red-600 text-sm uppercase"> delete</button>
+            <button onClick={()=>handleLsitngDelete(listing._id)} className="text-red-600 text-xs uppercase"> delete</button>
             <Link to={`/update-listing/${listing._id}`}>
-            <button className=" text-green-600 text-sm uppercase">edit</button>
+            <button className=" text-green-600 text-xs uppercase">edit</button>
             </Link>
           </div>
         </div>
