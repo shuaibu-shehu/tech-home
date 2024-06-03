@@ -11,7 +11,7 @@ const path = require('path');
 
 dotenv.config();
 try {
-  mongoose.connect(process.env.MONGO);
+  mongoose.connect("mongodb+srv://kalifa:kalifa@cluster0.ajugxhp.mongodb.net/?retryWrites=true&w=majority");
 } catch (error) {
   console.log(error);
 }
